@@ -40,7 +40,7 @@ for i in range (10, -1, -1):
 #if a number is divisible by 5 print buzz
 #if a number is divisible by both 3 and 5 print fizzbuzz
 
-for i in range (0, 100):
+'''for i in range (0, 100):
     if i % 3 == 0 and i % 5 ==0 :
         print(f"Fizzbuzz ")
     elif i % 3 == 0:
@@ -48,4 +48,4 @@ for i in range (0, 100):
     elif i % 5 == 0:
         print(f"buzz ")
     else:
-        print(i)
+        print(i)'''
