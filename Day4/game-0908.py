@@ -1,12 +1,13 @@
-'''#write secret num
+#write secret num
 #get a input
 #gess the secret num
 #you have 3 chance
-secretNumber = 3
+
+finalCountOfAttempt = 3
 maxAttempt = 0
 secretNum = int(input("Enter your Number: "))
-while maxAttempt < secretNumber:
-    if secretNum != secretNumber:
+while maxAttempt < finalCountOfAttempt:
+    if secretNum != finalCountOfAttempt:
         print("Wrong number!...")
         if secretNum > 3:
             print("Too high!...")
@@ -18,5 +19,5 @@ while maxAttempt < secretNumber:
         print("You are guess the number!...")
         break
     print("game over")
-exit()'''
+exit()
 
