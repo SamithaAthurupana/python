@@ -1,4 +1,6 @@
 import time
+from tokenize import endpats
+
 '''for i in range(10):
     print(i , end=" ")
 
