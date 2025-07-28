@@ -29,7 +29,7 @@ user_password = input("Enter the password: ").lower()
 if user_name == admin and user_password == password:
     print(RED+"""
 ====================================================
-        Welcome C Clarke Shopping App
+        Welcome-C-Clarke-Shopping-App
 ====================================================
     1. Available products
     2. Add products into cart
