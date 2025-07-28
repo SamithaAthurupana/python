@@ -34,7 +34,7 @@ if user_name == admin and user_password == password:
     1. Available products
     2. Add products into cart
     3. Check cart
-    4. Remove products in cart
+    4. Remove products in cart 
     5. Exit
 ====================================================  
 """)
