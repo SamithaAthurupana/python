@@ -8,6 +8,7 @@ while True:
     1.) Press 1 to view inventory
     2.) Press 2 to add a car
     3.) Press 3 to search a car by name
+    4.) Press 4 to search a add a customer
     """)
 
     choice = int(input("\n Enter choice: "))
@@ -30,9 +31,9 @@ while True:
             for car in car_inventry.find_cars_by_model(model):
                 print(f"Car Name - {car['model']} manufacture in - {car['manufacture_year']} - country - {car['country_of_origin']}")
 
-    if choice == 3:
-        for
-
-
+    if choice == 4:
+        for field in ["id", "name", "manufacture_year", "model", "price", "country_of_origin"]:
+            user_input = input(f"Enter Value for {field}")
+            user_inputs.append(user_input)
 
 
