@@ -1,12 +1,12 @@
 #python list is dynamic array, not a fixed size
-book_name = ["science", "maths", "history", "IT", "commerce", "SFT", 18]
-'''print(book_name)
+book_name = ["science", "maths", "history", "IT", "commerce", "SFT","LAW"]
+print(book_name)
 print(book_name[0])
 book_name[6] = "ET"
 print(book_name)
 print(len(book_name))
 print(book_name[-1]) #access the last element
-print(book_name[-2]) #access the last element
+print(book_name[-2]) #access the before last element
 
 for i in book_name:
     print(book_name)
@@ -18,8 +18,9 @@ print(book_name)
 del book_name[1]  #delete
 book_name.pop(1)
 print(book_name)
-#print(help(book_name))
-'''
+
+print(help(book_name))
+
 
 '''numbers_list = []
 total = 0
@@ -36,7 +37,7 @@ for number in numbers_list:
     total += number
 print(total)
 '''
-choice = 2
+'''choice = 2
 products = ["apple", "banana", "orange", "grapes", "milk"]
 cart = []
 item = input("Enter product name to add: ").lower()
@@ -50,4 +51,8 @@ while True:
             print(f"{item} added to cart.")
         else:
             print("Product not found!")
-            item = input("Enter product name to add: ").lower()
+            item = input("Enter product name to add: ").lower()'''
+
+'''name = ["science", "maths", "history", "IT", "commerce", "SFT"]
+for list_in_sen in name:
+    print(f"{list_in_sen}", end=" ")'''
