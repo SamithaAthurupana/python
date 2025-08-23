@@ -10,7 +10,8 @@ products = [
     {"id" : 5 , "name" : "crunchy chips" , "price" : 150.0},
     {"id" : 6, "name" : "fish rolls" , "price" : 100.0},
     {"id" : 7 , "name" : "bread with curry" , "price" : 300.0},
-    {"id" : 8 , "name" : "lava cake" , "price" : 650.0}
+    {"id" : 8 , "name" : "lava cake" , "price" : 650.0},
+    {"id" : 9 , "name" : "potato fingers" , "price" : 250.0}
 ]
 
 def show_products():
