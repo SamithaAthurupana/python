@@ -22,7 +22,7 @@ def show_products():
 def find_products_by_id(product_id):
     for product in products:
         if product["id"] == product_id:
-            return  product
+            return product
 
     return None
 

@@ -30,6 +30,8 @@ student1 = NewStudent("samitha", 27, "KDU")
 student2 = NewStudent("samitha", 27,"KDU")
 
 NewStudent.show_details(student1)
+NewStudent.sleep(student1) # class --> Method --> instance/object
+student2.sleep() # same thing output = object --> method
 
 print(student2 == student1)
 # print False because addresses are note same

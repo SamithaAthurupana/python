@@ -1,11 +1,11 @@
 def nic_checker(user_nic):
-
-    if len(user_nic) != 11:
+    if len(user_nic) != 10:  # should be 10, not 11
         return False
     if user_nic[0:9].isdigit() and user_nic[-1].upper() == "V":
         return True
+    return False
 
-user_nic = "123456789v"
+user_nic = "123456789V"
 
 if nic_checker(user_nic):
     print("nic is valid")
