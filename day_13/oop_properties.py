@@ -2,7 +2,7 @@ class ExampleClass:
 
     count = 0 # class variable
 
-    def __init__(self,val = 1):
+    def __init__(self, val = 1):
         self.val = val # instance variable
         self.val2 = 10
         ExampleClass.count += 1
