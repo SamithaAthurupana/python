@@ -16,7 +16,7 @@ class ExampleClass:
 
 
 test = ExampleClass()
-print(ExampleClass.count)
+print(test.count)
 test.z = 20
 test.val = 30
 
