@@ -46,7 +46,7 @@ numbers = [number ** 2 for number in range(11)]
 copy_numbers.append(numbers)
 print(copy_numbers)'''
 
-'''#print 1 to 100 2 to power numbers to empty list & check them module by 5
+'''#print 1 to 100 2 to power numbers to empty list & check them module01 by 5
 copy_numbers = []
 numbers = [i ** 2 for i in range(100) if i % 5 == 0]
 copy_numbers.append(numbers)
