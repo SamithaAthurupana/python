@@ -37,13 +37,12 @@ class Account:
     # this is public method
     def deposit(self, deposit_amount):
         self.__balance = self.__balance() + deposit_amount
+# check this
+    # def deposit(self, deposit_amount):
+    #     self.__balance = self.__balance + deposit_amount
 
     def withdraw(self, withdraw_amount):
         self.__balance -= withdraw_amount
-
-
-
-
 
 '''class CurrentAccount(Account):
     def __init__(self, account_no, balance, branch, check_ids):
@@ -52,7 +51,6 @@ class Account:
 
     def get_check_info(self):
         pass'''
-
 
 '''class SavingsAccount(Account):
     def __init__(self, account_no, balance, branch, atm_card_id):

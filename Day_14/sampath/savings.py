@@ -1,4 +1,4 @@
-from account import Account
+from .account import Account
 
 class SavingsAccount(Account):
     def __init__(self, account_no, balance, branch, user, atm_card_id):
