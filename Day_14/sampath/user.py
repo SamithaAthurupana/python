@@ -1,6 +1,6 @@
 class User:
     def __init__(self, nic, age, name):
-        self.__nic = nic
+        self.__nic = nic    # Encapsulation - private object variable
         self.__age = age
         self.__name = name
 
