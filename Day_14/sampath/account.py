@@ -5,10 +5,6 @@ class Account:
         self.__branch = branch
         self.__user = user
 
-    # account1 = SampathBank(12344, 300, "horana")
-    # print(account1.account_no) --->
-    # we can access anything did we encapsulate some variables,
-    # but we can use getters and setters
     def set_account_no(self, account_no):
         self.__account_no = account_no
     def get_account_no(self):
@@ -32,36 +28,17 @@ class Account:
     def check_balance(self):
         print(f"Here is your current account balance ${self.__balance}")
 
-    '''def deposit(self, deposit_amount):
-        self.set_balance(self.get_balance() + deposit_amount)'''
-    # this is public method
     def deposit(self, deposit_amount):
         self.__balance = self.__balance() + deposit_amount
-# check this
-    # def deposit(self, deposit_amount):
-    #     self.__balance = self.__balance + deposit_amount
 
     def withdraw(self, withdraw_amount):
         self.__balance -= withdraw_amount
 
-'''class CurrentAccount(Account):
-    def __init__(self, account_no, balance, branch, check_ids):
-        Account.__init__(self, account_no, balance, branch)
-        self.check_ids = check_ids
+        # account1 = SampathBank(12344, 300, "horana")
+        # print(account1.account_no) --->
+        # we can access anything did we encapsulate some variables,
+        # but we can use getters and setters
 
-    def get_check_info(self):
-        pass'''
-
-'''class SavingsAccount(Account):
-    def __init__(self, account_no, balance, branch, atm_card_id):
-        Account.__init__(self, account_no, balance, branch)
-        self.atm_card_id = atm_card_id
-
-    def deposit(self):
-        pass
-'''
-
-'''class WanithaSavingsAccount(SavingsAccount):
-    def __init__(self, account_no, balance, branch, atm_card_id):
-        SavingsAccount.__init__(self, account_no, balance, branch, atm_card_id)
-        pass'''
+    '''def deposit(self, deposit_amount):
+        self.set_balance(self.get_balance() + deposit_amount)'''
+    # this is public method
