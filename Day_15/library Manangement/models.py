@@ -3,7 +3,7 @@ import datetime
 from dataclasses import dataclass
 from typing import List, Optional
 
-@dataclass
+@dataclass  # dataclass කියන්නේ class එකක් define කරනකොට boilerplate code (constructor, repr, equality methods වගේ) auto-generate කරන decorator එක.
 class Book:
     book_id: str
     title: str
