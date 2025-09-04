@@ -99,3 +99,17 @@ class InMemoryMemberLoanRepository(LoanRepository):
 
     def list_all_loans(self) -> List[Loan]:
         return list(self.__loans.values())
+
+
+class InDatabaseRepository(BookRepository):
+    def add(self, book: Book) -> None:
+        pass
+
+    def get_book_by_id(self, book_id: str) -> Book:
+        pass
+
+    def update(self, book: Book):
+        pass
+
+    def list_all_books(self) -> List[Book]:
+        pass

@@ -9,7 +9,10 @@ class Book:
     title: str
     author: str
     year: str
-    book_lend_member_id : Optional[str] = None
+    book_lend_member_id : Optional[str] = None # optional property, not necessary to create an object
+
+    def is_available(self) -> bool:
+        return self.book_lend_member_id is None # returning true or false if book lend member id exist
 
 @dataclass
 class Member:
@@ -23,3 +26,6 @@ class Loan:
     book_id: str
     borrow_at: datetime
     returned_at: Optional[datetime] = None
+
+    def is_active(self) -> bool:
+        return self.returned_at is None
