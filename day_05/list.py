@@ -1,25 +1,37 @@
-#python list is dynamic array, not a fixed size
-book_name = ["science", "maths", "history", "IT", "commerce", "SFT","LAW"]
-print(book_name)
-print(book_name[0])
-book_name[6] = "ET"
-print(book_name)
-print(len(book_name))
-print(book_name[-1]) #access the last element
-print(book_name[-2]) #access the before last element
+# Python list is a dynamic array (can grow/shrink; not fixed size)
+book_name = ["science", "maths", "history", "IT", "commerce", "SFT", "LAW"]
 
-for i in book_name:
-    print(book_name)
+print(book_name)           # print the whole list
+print(book_name[0])        # access the first element (indexing starts at 0)
 
-book_name.append("silo")  #add value last
+book_name[6] = "ET"        # overwrite the item at index 6 (7th item -> "LAW" becomes "ET")
+print(book_name)           # show the updated list
 
-book_name.insert(2,"Atomic") #add value into specific index
-print(book_name)
-del book_name[1]  #delete
-book_name.pop(1)
-print(book_name)
+print(len(book_name))      # number of items in the list
 
-print(help(book_name))
+print(book_name[-1])       # access the last element (negative index)
+print(book_name[-2])       # access the second-to-last element
+
+# Iterate over the list and print each individual item
+for name in book_name:
+    print(name)
+
+book_name.append("silo")           # add a value at the end of the list
+book_name.insert(2, "Atomic")      # insert a value at a specific index (here, index 2)
+print(book_name)                   # show list after append + insert
+
+# Delete by index using 'del' (does not return the removed value)
+deleted_with_del = book_name[1]    # grab the value so we can show what was deleted
+del book_name[1]
+print("Deleted with del:", deleted_with_del)
+
+# Delete by index using 'pop' (returns the removed value)
+popped_value = book_name.pop(1)
+print("Deleted with pop:", popped_value)
+
+print(book_name)                   # final state of the list
+
+#print(help(book_name))
 
 
 '''numbers_list = []
