@@ -20,5 +20,6 @@ def remove_from_cart(product_id, choice):
 def view_cart():
     for arr in cart_array:
         print(f"""
+
 Your products:
     {arr["name"]}  X  {arr["quantity"]} """)

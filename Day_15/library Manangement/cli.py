@@ -92,7 +92,7 @@ while True:
     elif choice == 5:
         return_book()
     elif choice == 6:
-        print("Exiting... Goodbye!")
+        print("Exiting...")
         break
     else:
         print("Invalid choice. Try again.")
