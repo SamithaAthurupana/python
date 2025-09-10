@@ -1,146 +1,121 @@
-from dataclasses import dataclass   # ✅ Used to create simple classes with automatic __init__, __repr__, etc.
-from typing import List             # ✅ Type hint for lists (e.g., List[Product])
+# ---------------- IMPORTS ----------------
+from dataclasses import dataclass        # ✅ dataclass decorator import කරනවා
+from typing import List                  # ✅ type hints (List) use කරන්න import කරනවා
 from model import Product, OrderItem, Order, Customer, SuperMarkerError
-# ✅ Importing domain models (Product, Order, Customer, etc.) and custom exception (SuperMarkerError)
+# ✅ අපේ data model classes import කරනවා
+
 from repository import OrderRepository, ProductRepository, CustomerRepository
-# ✅ Importing repository interfaces (abstract classes). These define how data is stored/fetched.
+# ✅ repositories (storage layer interfaces) import කරනවා
 
 
+# ---------------- SERVICE CLASS ----------------
 @dataclass
 class SuperMarketService:
-    """
-    ✅ This is the Service Layer of our app.
-    - It contains the *business logic* (rules and validation).
-    - It depends on repository interfaces, not real storage.
-    - This makes the code flexible: you can switch between
-      in-memory, database, or API repositories without changing this class.
-    """
-
-    # Repositories (interfaces) injected into the service.
-    product: ProductRepository     # For product data operations
-    customer: CustomerRepository   # For customer data operations
-    order: OrderRepository         # For order data operations
+    # 🔑 Repository objects store කරනවා
+    # (Dependency Injection → DB connect වෙනවට instead memory repos දෙන්න පුළුවන්)
+    product: ProductRepository
+    customer: CustomerRepository
+    order: OrderRepository
 
     # ------------------ Product ------------------
     def add_product(self, product_id: str, name: str, price: float, quantity: int) -> Product:
-        """Add a new product after validation"""
+        """නව product එකක් system එකට add කරන method එක"""
 
-        # ✅ Check if product already exists (by ID).
+        # ✅ product_id එක duplicateද check කරනවා
         if self.product.get_product_by_id(product_id) is not None:
             raise SuperMarkerError("Product already exists")
 
-        # ✅ Validate quantity must be >= 0
+        # ✅ validation: stock quantity negative නොවිය යුතුයි
         if quantity < 0:
             raise SuperMarkerError("Quantity cannot be less than zero")
-
-        # ✅ Validate price must be >= 0
+        # ✅ validation: price negative නොවිය යුතුයි
         if price < 0:
             raise SuperMarkerError("Price cannot be less than zero")
 
-        # ✅ Create a new Product object with given details
+        # ✅ Product object එක create කරනවා
         product = Product(product_id, name, price, quantity)
-
-        # ✅ Add the product into the repository (storage)
+        # ✅ repository එකට save කරනවා
         self.product.add(product)
-
-        # ✅ Return the newly created product
         return product
 
     def get_all_available_products(self) -> List[Product]:
-        """Return only products that are in stock"""
-
-        # ✅ Fetch all products, filter only those that are available
+        """ඉන්න stock එක 0ට වැඩි products එක return කරනවා"""
+        # 👉 list comprehension use කරනවා
+        # p.is_available() == True නම් පමණක් filter වෙනවා
         return [p for p in self.product.list_all() if p.is_available()]
 
     def get_products(self) -> List[Product]:
-        """Return all products (no filter)"""
-
-        # ✅ Simply return everything from repository
+        """හෑම product එකම (filter නැතිව) return කරනවා"""
         return self.product.list_all()
 
     # ------------------ Customer ------------------
     def add_customer(self, customer_id: str, name: str, email: str, contact: str) -> Customer:
-        """Add a new customer after validation"""
+        """නව customer එකක් add කරන method එක"""
 
-        # ✅ Check if customer already exists
+        # ✅ duplicate customer check කරනවා
         if self.customer.get_customer_by_id(customer_id) is not None:
             raise SuperMarkerError("Customer already exists")
 
-        # ✅ Create a new Customer object
+        # ✅ Customer object එක create කරනවා
         customer = Customer(customer_id, name, email, contact)
-
-        # ✅ Add customer to repository
+        # ✅ save කරනවා
         self.customer.add(customer)
-
-        # ✅ Return the new customer
         return customer
 
     def get_all_customers(self) -> List[Customer]:
-        """Return all customers"""
-
-        # ✅ Just return all customers from repository
+        """ඉන්න customers හැම එකම return කරනවා"""
         return self.customer.list_all()
 
     # ------------------ Order ------------------
     def add_order(self, order_id: str, customer_id: str) -> Order:
-        """Create a new order for a customer"""
+        """නව order එකක් customer එකකට create කරන method එක"""
 
-        # ✅ Check if order already exists
+        # ✅ duplicate order check කරනවා
         if self.order.get_order_by_id(order_id) is not None:
             raise SuperMarkerError("Order already exists")
 
-        # ✅ Ensure that the customer exists
+        # ✅ customer එක exist ද බලනවා
         cust = self.customer.get_customer_by_id(customer_id)
         if cust is None:
             raise SuperMarkerError("Customer doesn't exist")
 
-        # ✅ Create a new Order object linked to the customer
-        # Note: use customer.name (not ID) for readability
+        # ✅ නව order එක create කරනවා (customer name attach කරලා)
         order = Order(order_id, customer_id, customer_name=cust.name)
-
-        # ✅ Add the order to repository
+        # ✅ save කරනවා
         self.order.add(order)
-
-        # ✅ Return the new order
         return order
 
     def add_item_to_order(self, order_id: str, product_id: str, quantity: int) -> None:
-        """Add a product as an item into an existing order"""
+        """එක order එකකට product එකක් add කරන method එක"""
 
-        # ✅ Fetch the order by ID
+        # ✅ order එක retrieve කරනවා
         order = self.order.get_order_by_id(order_id)
-
-        # ✅ Fetch the product by ID
+        # ✅ product එක retrieve කරනවා
         product = self.product.get_product_by_id(product_id)
 
-        # ✅ If order does not exist, raise error
+        # Validation checks
         if order is None:
             raise SuperMarkerError("Order doesn't exist")
-
-        # ✅ If product does not exist, raise error
         if product is None:
             raise SuperMarkerError("Product doesn't exist")
 
-        # ✅ Check if enough stock is available
+        # ✅ stock check
         if product.quantity < quantity:
             raise SuperMarkerError(f"Not enough {product.name} left")
 
-        # ✅ Create a new OrderItem (line in the order)
+        # ✅ OrderItem එක create කරනවා
         order_item = OrderItem(product_id, product.name, quantity, product.price)
 
-        # ✅ Add the item into the order
-        # If order has its own add_item() method → use it
+        # ✅ order class එකේ add_item() තියෙනවද බලනවා
         if hasattr(order, "add_item"):
-            order.add_item(order_item)
+            order.add_item(order_item)   # custom method call
         else:
-            # Otherwise, directly append to items list
-            order.items.append(order_item)
+            order.items.append(order_item)   # direct append
 
-        # ✅ Reduce stock of the product
+        # ✅ product stock එක reduce කරනවා
         product.reduce_quantity(quantity)
-
-        # ✅ Update product in repository (so stock is saved)
+        # ✅ updated product save කරනවා
         self.product.update(product)
 
-        # ✅ Update order in repository (so order is saved)
+        # ✅ updated order save කරනවා
         self.order.update(order)

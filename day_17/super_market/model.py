@@ -1,61 +1,54 @@
-# IMPORTS ----------------
-from dataclasses import dataclass, field    # dataclass helper + field for default mutable fields
-from typing import List                    # Type hinting for lists
-
+from dataclasses import dataclass, field    # automatic constructor (__init__) create
+from typing import List                    # List type hint (e.g., List[OrderItem])
 
 # CUSTOM EXCEPTION ----------------
-class SuperMarkerError(Exception):         # Define a custom exception for business-rule violations
-    """Raised when a supermarket business rule is violated (e.g., not enough stock)."""
-    pass                                   # No extra behaviour; inherits from Exception
-
+class SuperMarkerError(Exception):
+    pass    # normal Exception inherit
 
 # PRODUCT CLASS ----------------
 @dataclass
 class Product:
-    product_id: str        # Unique ID for the product
-    name: str              # Human-friendly product name
-    price: float           # Price per unit
-    quantity: int          # Current stock/available quantity
+    product_id: str        # Product unique ID
+    name: str              # Product name
+    price: float           # Unit price
+    quantity: int          # Available stock
 
-    def is_available(self) -> bool:
-        """Return True if at least one unit is available."""
-        return self.quantity > 0
+    def is_available(self) -> bool: # True/False return
+        return self.quantity > 0   # quantity > 0 then return True otherwise False
 
     def add_quantity(self, amount: int) -> None:
-        """Increase stock by `amount`. Reject negative amounts."""
-        if amount < 0:                          # Validate argument
+        if amount < 0:   # ✅ Negative numbers add කරන්න attempt කළොත් error
             raise ValueError("amount to add must be non-negative")
-        self.quantity += amount                 # Increase the stored quantity
+        self.quantity += amount   # ✅ stock එකට add කරනවා
 
     def reduce_quantity(self, amount: int) -> None:
-        """Decrease stock by `amount`. Raise SuperMarkerError if insufficient stock."""
-        if amount < 0:                          # Validate argument
+        """Stock එකෙන් item reduce කරන method එක"""
+        if amount < 0:   # ✅ Negative number reduce කරන්න දෙන්නේ නෑ
             raise ValueError("amount to reduce must be non-negative")
-        if amount > self.quantity:              # If we try to remove more than available
-            # Helpful message that shows current available quantity
+        if amount > self.quantity:  # ✅ stock එකට වඩා reduce කරන්න හදනව නම් error throw වෙනවා
             raise SuperMarkerError(f"Not enough stock to reduce. Available: {self.quantity}")
-        self.quantity -= amount                 # Reduce the stored quantity
+        self.quantity -= amount   # ✅ stock එකෙන් reduce කරනවා
 
 
 # ---------------- CUSTOMER CLASS ----------------
 @dataclass
 class Customer:
-    cust_id: str           # Unique customer ID
-    name: str              # Customer full name
-    email: str             # Customer email
-    phone: str             # Customer phone number (string to preserve leading zeros and formatting)
+    cust_id: str           # Customer ID (unique)
+    name: str              # Full name
+    email: str             # Email address
+    phone: str             # Phone number (string → leading 0 save වෙන්න)
 
 
 # ---------------- ORDER ITEM CLASS ----------------
 @dataclass
 class OrderItem:
-    product_id: str        # Product ID being ordered
-    product_name: str      # Name of the product at time of ordering (snapshot)
-    quantity: int          # Quantity ordered
-    unit_price: float      # Price per unit at the time of order
+    product_id: str        # Product ID (refer to Product)
+    product_name: str      # Product name (snapshot of purchase time)
+    quantity: int          # How many units ordered
+    unit_price: float      # Price per unit at time of order
 
     def total_price(self) -> float:
-        """Return total price for this order line (quantity * unit_price)."""
+        """Single line total = quantity * unit_price"""
         return self.quantity * self.unit_price
 
 
@@ -63,65 +56,65 @@ class OrderItem:
 @dataclass
 class Order:
     order_id: str                                 # Unique order ID
-    customer_id: str                              # Customer's ID who placed the order
-    customer_name: str                            # Customer's name (human readable)
-    items: List[OrderItem] = field(default_factory=list)  # List of OrderItem, default empty list
+    customer_id: str                              # Which customer placed this order
+    customer_name: str                            # Customer’s name
+    items: List[OrderItem] = field(default_factory=list)  # ✅ Empty list default value
 
     def add_item(self, item: OrderItem) -> None:
-        """Add an OrderItem to the order's items list."""
-        # we use a distinct method name (add_item) for clarity (was add_order before)
-        self.items.append(item)
+        """Order එකට product එකක් add කරන method එක"""
+        self.items.append(item)   # ✅ append → new item එක list එකට add වෙනවා
 
     def total_amount(self) -> float:
-        """Calculate the total cost of the order by summing each item's total."""
-        total = 0.0                               # start accumulator
-        for item in self.items:                   # iterate each item
-            total += item.total_price()           # add line total
-        return total                              # return computed total
+        """Order එකේ total cost calculate කරන method එක"""
+        total = 0.0                               # ✅ accumulator variable එක
+        for item in self.items:                   # ✅ Loop එකෙන් හැම OrderItem එකක් ගන්නවා
+            total += item.total_price()           # ✅ total_price() call කරලා එක එක item price එක add කරනවා
+        return total                              # ✅ return final sum
 
     def item_count(self) -> int:
-        """Return number of distinct OrderItem lines in the order (not total quantity)."""
-        return len(self.items)                    # integer count of item lines
+        """Order එකේ තියෙන different OrderItems count කරනවා (distinct lines)"""
+        return len(self.items)   # ✅ List එකේ කොච්චර items තියෙනවද කියලා ගණන ගන්නවා
 
     def item_quantity(self, product_id: str) -> int:
-        """Return total quantity for a given product_id in this order (sums multiple lines)."""
-        total_qty = 0                             # accumulator for quantity
-        for item in self.items:                   # loop through each order line
-            if item.product_id == product_id:     # if same product id
-                total_qty += item.quantity        # add its quantity
-        return total_qty                          # return summed quantity
+        """එකම product එක order එකේ කොච්චර quantity තියෙනවද කියලා ගණන් කරනවා"""
+        total_qty = 0
+        for item in self.items:                   # ✅ Loop එකෙන් හැම item එක check කරනවා
+            if item.product_id == product_id:     # ✅ දාපු product_id එක match වුණොත්
+                total_qty += item.quantity        # ✅ quantity එක add කරනවා
+        return total_qty                          # ✅ final total quantity return කරනවා
 
 
 # ---------------- RUN / DEMO ----------------
-if __name__ == '__main__':                      # Only run demo when file executed directly
-    # Create a product example
-    p = Product(product_id="P001", name="Milk", price=2.5, quantity=10)      # 10 units of Milk
-    print("Product created ->", p)                                           # show product state
+if __name__ == '__main__':
+    # Product එකක් create කරනවා
+    p = Product(product_id="P001", name="Milk", price=2.5, quantity=10)
+    print("Product created ->", p)
 
-    # Create a customer example
+    # Customer එකක් create කරනවා
     c = Customer(cust_id="C001", name="Anura", email="anura@example.com", phone="0771234567")
-    print("Customer created ->", c)                                          # show customer state
+    print("Customer created ->", c)
 
-    # Create an order for that customer
+    # Order එකක් create කරනවා (empty order initially)
     order = Order(order_id="O001", customer_id=c.cust_id, customer_name=c.name)
-    print("Empty order ->", order)                                           # shows empty order
+    print("Empty order ->", order)
 
-    # Create an order item and add it to order
+    # Order item එකක් create කරනවා
     oi = OrderItem(product_id=p.product_id, product_name=p.name, quantity=3, unit_price=p.price)
-    print("OrderItem created ->", oi)                                        # show order item
+    print("OrderItem created ->", oi)
 
-    order.add_item(oi)                                                       # add the item to the order
-    print("Order after adding item ->", order)                               # order now contains one item
+    # Order එකට item එක add කරනවා
+    order.add_item(oi)
+    print("Order after adding item ->", order)
 
-    # Show computed values
-    print("Total amount for order:", order.total_amount())                   # 3 * 2.5 = 7.5
-    print("Number of item lines in order:", order.item_count())              # 1
-    print("Quantity of product P001 in order:", order.item_quantity("P001")) # 3
+    # Calculations demo
+    print("Total amount for order:", order.total_amount())        # ✅ Loop එකෙන් total ගන්නවා
+    print("Number of item lines in order:", order.item_count())   # ✅ len() use
+    print("Quantity of product P001 in order:", order.item_quantity("P001")) # ✅ Loop එකෙන් qty count
 
-    # Demonstrate stock change and error handling
+    # Error handling demo
     try:
-        p.reduce_quantity(5)                 # reduce stock by 5 => remaining 5
+        p.reduce_quantity(5)   # ✅ stock reduce by 5 → ok
         print("Product after reducing 5:", p)
-        p.reduce_quantity(10)                # attempt to reduce more than available => raises
+        p.reduce_quantity(10)  # ✅ stock 10 reduce attempt (අඩුවන stock නෑ → Error throw වෙනවා)
     except SuperMarkerError as e:
         print("Caught business error:", e)
