@@ -39,10 +39,7 @@ class SuperMarketService:
         return product
 
     def get_all_available_products(self) -> List[Product]:
-        """ඉන්න stock එක 0ට වැඩි products එක return කරනවා"""
-        # 👉 list comprehension use කරනවා
-        # p.is_available() == True නම් පමණක් filter වෙනවා
-        return [p for p in self.product.list_all() if p.is_available()]
+        return [p for p in self.product.list_all() if p.is_available()]  # ✅ p.is_available() == True නම් පමණක් filter වෙනවා
 
     def get_products(self) -> List[Product]:
         """හෑම product එකම (filter නැතිව) return කරනවා"""
