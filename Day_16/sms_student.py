@@ -81,15 +81,7 @@ def get_gender_from_nic(nic):
         return "Unknown"
 
 
-# ===============================
-# STUDENT MANAGEMENT FUNCTIONS
-# ===============================
-
 def add_student(students, first_name, last_name, address, nic, nationality, academic_no):
-    """
-    Add a new student into the dictionary.
-    Automatically fills age, gender, and birthday using NIC.
-    """
     student_id = generate_student_id(nic)  # Auto-generate Student ID
     birthday = get_birthday_from_nic(nic)  # Extract birthday
     age = get_age_from_nic(nic)  # Calculate age
@@ -107,39 +99,39 @@ def add_student(students, first_name, last_name, address, nic, nationality, acad
         "age": age,
         "gender": gender
     }
-    print(f"✅ Student {first_name} {last_name} added with ID {student_id}.")
+    print(f"Student {first_name} {last_name} added with ID {student_id}.")
 
 
 def search(students, student_id):
     """Search and display student details by ID."""
     if student_id in students:
-        print(f"🔎 Student ID: {student_id} -> {students[student_id]}")
+        print(f"Student ID: {student_id} -> {students[student_id]}")
     else:
-        print("⚠️ Student not found.")
+        print("Student not found.")
 
 
 def delete_student(students, student_id):
     """Delete student by ID."""
     if student_id in students:
         del students[student_id]
-        print(f"🗑️ Student ID {student_id} deleted successfully.")
+        print(f"Student ID {student_id} deleted successfully.")
     else:
-        print("⚠️ Student not found.")
+        print("Student not found!")
 
 
 def update_student_contact(students, student_id, updated_no):
     """Update student’s contact number (only if student exists)."""
     if student_id in students:
         students[student_id]["contact"] = updated_no  # Add contact field dynamically
-        print(f"📞 Contact updated for {students[student_id]['first_name']}.")
+        print(f"Contact updated for {students[student_id]['first_name']}.")
     else:
-        print("⚠️ Student not found.")
+        print("Student not found.")
 
 
 def view_student_names(students):
     """Show all student IDs and names in system."""
     if not students:
-        print("⚠️ No student records available.")
+        print("No student records available.")
     else:
         for student_id, details in students.items():
             print(f"ID: {student_id} | Name: {details['first_name']} {details['last_name']}")
@@ -159,45 +151,40 @@ def add_student_marks(students, student_id):
             "science": science,
             "history": history
         }
-        print("✅ Marks added successfully.")
+        print("Marks added successfully.")
     else:
-        print("⚠️ Student not found.")
+        print("Student not found.")
 
 
 def view_student_marks(students, student_id):
     """View marks of a student."""
     if student_id in students:
         if "marks" in students[student_id]:  # Check if marks available
-            print(f"📘 Marks for {students[student_id]['first_name']} {students[student_id]['last_name']}:")
+            print(f"Marks for {students[student_id]['first_name']} {students[student_id]['last_name']}:")
             for subject, marks in students[student_id]["marks"].items():
                 print(f"   {subject.capitalize()}: {marks}")
         else:
-            print("⚠️ Marks not available.")
+            print("Marks not available.")
     else:
-        print("⚠️ Student not found.")
+        print("Student not found.")
 
 
 def show_student_averages(students):
     """Show average marks for each student."""
     if not students:
-        print("⚠️ No student records available.")
+        print("No student records available.")
         return
 
     for student_id, student_data in students.items():
         if "marks" in student_data:  # Only if marks exist
             total = sum(student_data["marks"].values())  # Sum all subjects
             average = total / len(student_data["marks"])  # Average = total ÷ no. of subjects
-            print(f"📊 {student_data['first_name']} {student_data['last_name']} - Average: {average:.2f}")
+            print(f"{student_data['first_name']} {student_data['last_name']} - Average: {average:.2f}")
         else:
-            print(f"📊 {student_data['first_name']} {student_data['last_name']} - No marks available.")
+            print(f"{student_data['first_name']} {student_data['last_name']} - No marks available.")
 
-
-# ===============================
-# MENU & MAIN LOOP
-# ===============================
 
 def show_menu():
-    """Display menu options for user."""
     print("""
     ===== Student Management Menu =====
     1. Add Student
@@ -214,8 +201,7 @@ def show_menu():
 
 
 def main():
-    """Main program loop that keeps running until user exits."""
-    while True:  # Infinite loop until choice = 9
+    while True:
         show_menu()  # Show menu each time
         choice = input("Enter your choice (1-9): ").strip()
 
@@ -262,11 +248,7 @@ def main():
             break  # Exit the loop → Program ends
 
         else:
-            print("⚠️ Invalid choice. Please enter 1-9.")
+            print("Invalid choice. Please enter 1-9.")
 
-
-# ===============================
-# RUN PROGRAM
-# ===============================
 
 main()  # Start the system

@@ -17,20 +17,18 @@ class Product:
         return self.quantity > 0   # quantity > 0 then return True otherwise False
 
     def add_quantity(self, amount: int) -> None:
-        if amount < 0:   # ✅ Negative numbers add කරන්න attempt කළොත් error
+        if amount < 0:   # When negative numbers add attempt will error
             raise ValueError("amount to add must be non-negative")
-        self.quantity += amount   # ✅ stock එකට add කරනවා
+        self.quantity += amount   # stock add
 
-    def reduce_quantity(self, amount: int) -> None:
-        """Stock එකෙන් item reduce කරන method එක"""
-        if amount < 0:   # ✅ Negative number reduce කරන්න දෙන්නේ නෑ
+    def reduce_quantity(self, amount: int) -> None: # reduce item in stock
+        if amount < 0:   # Do not accept Negative number reduce
             raise ValueError("amount to reduce must be non-negative")
-        if amount > self.quantity:  # ✅ stock එකට වඩා reduce කරන්න හදනව නම් error throw වෙනවා
+        if amount > self.quantity:  # can not reduce more than stock
             raise SuperMarkerError(f"Not enough stock to reduce. Available: {self.quantity}")
-        self.quantity -= amount   # ✅ stock එකෙන් reduce කරනවා
+        self.quantity -= amount   # reduce from stock
 
 
-# ---------------- CUSTOMER CLASS ----------------
 @dataclass
 class Customer:
     cust_id: str           # Customer ID (unique)
@@ -38,8 +36,6 @@ class Customer:
     email: str             # Email address
     phone: str             # Phone number (string → leading 0 save වෙන්න)
 
-
-# ---------------- ORDER ITEM CLASS ----------------
 @dataclass
 class OrderItem:
     product_id: str        # Product ID (refer to Product)
@@ -51,37 +47,31 @@ class OrderItem:
         """Single line total = quantity * unit_price"""
         return self.quantity * self.unit_price
 
-
-# ---------------- ORDER CLASS ----------------
 @dataclass
 class Order:
     order_id: str                                 # Unique order ID
     customer_id: str                              # Which customer placed this order
     customer_name: str                            # Customer’s name
-    items: List[OrderItem] = field(default_factory=list)  # ✅ Empty list default value
+    items: List[OrderItem] = field(default_factory=list)  # Empty list default value
 
-    def add_item(self, item: OrderItem) -> None:
-        """Order එකට product එකක් add කරන method එක"""
-        self.items.append(item)   # ✅ append → new item එක list එකට add වෙනවා
+    def add_item(self, item: OrderItem) -> None: # product add to order
+        self.items.append(item)   # append → new item to list
 
-    def total_amount(self) -> float:
-        """Order එකේ total cost calculate කරන method එක"""
-        total = 0.0                               # ✅ accumulator variable එක
-        for item in self.items:                   # ✅ Loop එකෙන් හැම OrderItem එකක් ගන්නවා
-            total += item.total_price()           # ✅ total_price() call කරලා එක එක item price එක add කරනවා
-        return total                              # ✅ return final sum
+    def total_amount(self) -> float:# total cost in order
+        total = 0.0                               # accumulator variable එක
+        for item in self.items:                   # Loop to all the OrderItem
+            total += item.total_price()           # total_price() call and add the item price
+        return total                              # return final sum
 
-    def item_count(self) -> int:
-        """Order එකේ තියෙන different OrderItems count කරනවා (distinct lines)"""
-        return len(self.items)   # ✅ List එකේ කොච්චර items තියෙනවද කියලා ගණන ගන්නවා
+    def item_count(self) -> int:# different OrderItems count in order (distinct lines)
+        return len(self.items)   # items count in list
 
     def item_quantity(self, product_id: str) -> int:
-        """එකම product එක order එකේ කොච්චර quantity තියෙනවද කියලා ගණන් කරනවා"""
         total_qty = 0
-        for item in self.items:                   # ✅ Loop එකෙන් හැම item එක check කරනවා
-            if item.product_id == product_id:     # ✅ දාපු product_id එක match වුණොත්
-                total_qty += item.quantity        # ✅ quantity එක add කරනවා
-        return total_qty                          # ✅ final total quantity return කරනවා
+        for item in self.items:                   # Loop and check every item
+            if item.product_id == product_id:     # දාපු product_id එක match වුණොත්
+                total_qty += item.quantity        # quantity එක add කරනවා
+        return total_qty                          # final total quantity return කරනවා
 
 
 # ---------------- RUN / DEMO ----------------

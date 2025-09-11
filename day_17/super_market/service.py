@@ -1,14 +1,12 @@
-# ---------------- IMPORTS ----------------
-from dataclasses import dataclass        # ✅ dataclass decorator import කරනවා
-from typing import List                  # ✅ type hints (List) use කරන්න import කරනවා
+from dataclasses import dataclass
+from typing import List
 from model import Product, OrderItem, Order, Customer, SuperMarkerError
-# ✅ අපේ data model classes import කරනවා
 
 from repository import OrderRepository, ProductRepository, CustomerRepository
-# ✅ repositories (storage layer interfaces) import කරනවා
+# repositories (storage layer interfaces) import
 
 
-# ---------------- SERVICE CLASS ----------------
+# SERVICE CLASS ----------------
 @dataclass
 class SuperMarketService:
     # 🔑 Repository objects store කරනවා
@@ -17,44 +15,33 @@ class SuperMarketService:
     customer: CustomerRepository
     order: OrderRepository
 
-    # ------------------ Product ------------------
+    # Product ------------------
     def add_product(self, product_id: str, name: str, price: float, quantity: int) -> Product:
-        """නව product එකක් system එකට add කරන method එක"""
 
-        # ✅ product_id එක duplicateද check කරනවා
-        if self.product.get_product_by_id(product_id) is not None:
+        if self.product.get_product_by_id(product_id) is not None: # check product_id, is duplicate?
             raise SuperMarkerError("Product already exists")
-
-        # ✅ validation: stock quantity negative නොවිය යුතුයි
-        if quantity < 0:
+        if quantity < 0:      # ✅ validation: stock quantity negative නොවිය යුතුයි
             raise SuperMarkerError("Quantity cannot be less than zero")
-        # ✅ validation: price negative නොවිය යුතුයි
-        if price < 0:
+        if price < 0:         # ✅ validation: price negative නොවිය යුතුයි
             raise SuperMarkerError("Price cannot be less than zero")
 
-        # ✅ Product object එක create කරනවා
-        product = Product(product_id, name, price, quantity)
-        # ✅ repository එකට save කරනවා
-        self.product.add(product)
+
+        product = Product(product_id, name, price, quantity) # ✅ create Product object
+        self.product.add(product) # ✅ save repository
         return product
 
     def get_all_available_products(self) -> List[Product]:
-        return [p for p in self.product.list_all() if p.is_available()]  # ✅ p.is_available() == True නම් පමණක් filter වෙනවා
+        return [p for p in self.product.list_all() if p.is_available()]  # ✅ p.is_available() == True
 
     def get_products(self) -> List[Product]:
-        """හෑම product එකම (filter නැතිව) return කරනවා"""
         return self.product.list_all()
 
-    # ------------------ Customer ------------------
+    # Customer ------------------
     def add_customer(self, customer_id: str, name: str, email: str, contact: str) -> Customer:
-        """නව customer එකක් add කරන method එක"""
-
-        # ✅ duplicate customer check කරනවා
-        if self.customer.get_customer_by_id(customer_id) is not None:
+        if self.customer.get_customer_by_id(customer_id) is not None: # ✅ duplicate customer check
             raise SuperMarkerError("Customer already exists")
 
-        # ✅ Customer object එක create කරනවා
-        customer = Customer(customer_id, name, email, contact)
+        customer = Customer(customer_id, name, email, contact) # ✅ Customer object එක create කරනවා
         # ✅ save කරනවා
         self.customer.add(customer)
         return customer

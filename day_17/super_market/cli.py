@@ -1,12 +1,7 @@
-# ---------------- IMPORTS ----------------
+
 from repository import InMemoryProductRepository, InMemoryOrderRepository, InMemoryCustomerRepository
-# ✅ මේකෙන් import කරනව in-memory repositories (data ගබඩා කරන්න memory එක යොදා ගන්නවා, DB use කරනව නෑ)
-
 from service import SuperMarketService, SuperMarkerError
-# ✅ Service layer (business logic තියන class) සහ error class එක import කරනවා
 
-
-# ---------------- SERVICE INITIALIZATION ----------------
 # ✅ Dependency Injection කියන concept එක මෙතැන use කරනවා
 #    Repositories (storage) pass කරනවා service එකට
 service = SuperMarketService(
@@ -16,106 +11,77 @@ service = SuperMarketService(
 )
 
 
-# ------------------- ADD PRODUCT -------------------
 def add_products():
-    """User input ගෙන, product එක add කරන function එක"""
     try:
-        # ✅ User input ගන්නවා
         prod_id = input("Enter product id: ")           # Product ID
         name = input("Enter product name: ")            # Product name
         price = float(input("Enter product price: "))   # Price -> float convert කරනවා
         quantity = int(input("Enter product quantity: ")) # Quantity -> int convert කරනවා
 
-        # ✅ Service layer එක call කරලා product එක add කරනවා
-        product = service.add_product(prod_id, name, price, quantity)
-
-        # Success message
-        print(f"Product '{product.name}' added successfully!")
+        product = service.add_product(prod_id, name, price, quantity) # ✅ Service layer එක call කරලා product එක add කරනවා
+        print(f"Product '{product.name}' added successfully!") # Success message
 
     except ValueError as e:
-        # ✅ Wrong data type enter කලොත් (letters instead of numbers)
-        print("Type Error: " + str(e))
+        print("Type Error: " + str(e)) # ✅ Wrong data type enter කලොත් (letters instead of numbers)
 
     except SuperMarkerError as e:
-        # ✅ Business logic error (duplicate product, invalid qty/price)
-        print("Business Error: " + str(e))
+        print("Business Error: " + str(e)) # ✅ Business logic error (duplicate product, invalid qty/price)
 
 
-# ------------------- ADD CUSTOMER -------------------
 def add_customer():
-    """User input ගෙන, customer එක register කරන function එක"""
     try:
         cust_id = input("Enter customer id: ")   # Customer ID
         name = input("Enter customer name: ")    # Name
         email = input("Enter customer email: ")  # Email
         contact = input("Enter customer contact number: ") # Contact number
 
-        # ✅ Service එකට call කරලා customer එක add කරනවා
-        customer = service.add_customer(cust_id, name, email, contact)
-
+        customer = service.add_customer(cust_id, name, email, contact) # ✅ Service එකට call කරලා customer එක add කරනවා
         print(f"Customer '{customer.name}' added successfully!")
 
     except SuperMarkerError as e:
-        # ✅ Duplicate customers හෝ invalid data errors
-        print("Business Error: " + str(e))
+        print("Business Error: " + str(e)) # ✅ Duplicate customers හෝ invalid data errors
 
 
-# ------------------- LIST PRODUCTS -------------------
 def list_product():
-    """System එකේ තියන සියලු products print කරනවා"""
     products = service.get_products()   # ✅ Service එකෙන් products list එක ගන්නවා
 
     if not products:   # ✅ List එක empty නම්
         print("No products available.")
         return
 
-    # ✅ Loop එකෙන් product details print කරනවා
-    for prod in products:
+    for prod in products: # ✅ Loop එකෙන් product details print කරනවා
         print(f"ID: {prod.product_id} | Name: {prod.name} | "
               f"Quantity: {prod.quantity} | Price: {prod.price}")
 
 
-# ------------------- CREATE ORDER -------------------
 def create_order():
-    """Existing customer එකකට order එකක් create කරනවා"""
     try:
         cust_id = input("Enter customer ID for this order: ")   # ✅ Customer ID (exist වෙන එක)
         order_id = input("Enter order ID: ")                    # ✅ Unique Order ID
 
-        # ✅ Service එක call කරලා order එක create කරනවා
-        order = service.add_order(order_id, cust_id)
-
+        order = service.add_order(order_id, cust_id) # ✅ Service එක call කරලා order එක create කරනවා
         print(f"Order '{order.order_id}' created for customer '{order.customer_name}'")
 
     except SuperMarkerError as e:
-        # ✅ Error (duplicate order, missing customer)
-        print("Business Error: " + str(e))
+        print("Business Error: " + str(e))   # ✅ Error (duplicate order, missing customer)
 
 
-# ------------------- ADD ITEM TO ORDER -------------------
 def add_item_to_order():
-    """Existing order එකකට product එකක් add කරනවා"""
     try:
         order_id = input("Enter order ID: ")         # ✅ Order ID
         product_id = input("Enter product ID: ")     # ✅ Product ID
         quantity = int(input("Enter quantity: "))    # ✅ Quantity -> int convert
 
-        # ✅ Service layer එක call කරනවා
-        service.add_item_to_order(order_id, product_id, quantity)
-
+        service.add_item_to_order(order_id, product_id, quantity) # ✅ Service layer එක call කරනවා
         print("Item added to order successfully!")
 
     except ValueError as e:
-        # ✅ Wrong input type (e.g. letters instead of numbers)
-        print("Type Error: " + str(e))
+        print("Type Error: " + str(e)) # ✅ Wrong input type (e.g. letters instead of numbers)
 
     except SuperMarkerError as e:
-        # ✅ Not enough stock, order not found, product not found
-        print("Business Error: " + str(e))
+        print("Business Error: " + str(e))  # ✅ Not enough stock, order not found, product not found
 
 
-# ------------------- MAIN MENU LOOP -------------------
-# ✅ Program එක run වෙලා continuously user input ගන්නවා
 while True:
     print(
         """
@@ -130,10 +96,8 @@ while True:
     )
 
     try:
-        # ✅ User input -> int convert කරනවා
         choice = int(input("Enter your choice: "))
 
-        # ✅ Choice එකට අනුව functions call කරනවා
         if choice == 1:
             add_products()
         elif choice == 2:
@@ -146,10 +110,9 @@ while True:
             add_item_to_order()
         elif choice == 6:
             print("Exiting system... Thank you!")
-            break   # ✅ Loop එකෙන් break වෙලා program එක exit වෙනවා
+            break
         else:
             print("Invalid choice. Please try again.")
 
     except ValueError:
-        # ✅ User input number එකක් නෙමෙයි නම්
-        print("Please enter a number between 1 and 6.")
+        print("Please enter a number between 1 and 6.") # ✅ User input number එකක් නෙමෙයි නම්
