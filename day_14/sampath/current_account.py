@@ -1,4 +1,4 @@
-from Day_14.sampath.account import Account
+from day_14.sampath.account import Account
 
 
 class CurrentAccount(Account):

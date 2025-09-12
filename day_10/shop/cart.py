@@ -1,25 +1,24 @@
-cart_array = {}
+cart_array = {}  # dictionary { product_id : {"product": product, "quantity": qty} }
 
 def add_to_cart(product, quantity):
-    cart_array[product] = quantity
-    print(f"{product} X {quantity} added to cart successfully!")
-
-def remove_from_cart(product_id, choice):
-    global cart_array
-    if choice in range(1,3):
-        if choice == 1:
-            cart_array = [item for item in cart_array if item["product"]["ID"] != product_id]
-            print(f"Removed product id - {product_id}")
-
-        else:
-            del cart_array
-
+    product_id = product["id"]
+    if product_id in cart_array:
+        cart_array[product_id]["quantity"] += quantity
     else:
-        print("Enter a valid number!")
+        cart_array[product_id] = {"product": product, "quantity": quantity}
+    print(f"✅ {product['name']} X {quantity} added to cart successfully!")
+
+def remove_from_cart(product_id):
+    if product_id in cart_array:
+        del cart_array[product_id]
+        print(f"🗑️ Removed product id - {product_id}")
+    else:
+        print("❌ Product not found in cart!")
 
 def view_cart():
-    for arr in cart_array:
-        print(f"""
-
-Your products:
-    {arr["name"]}  X  {arr["quantity"]} """)
+    if not cart_array:
+        print("🛒 Your cart is empty!")
+    else:
+        print("\nYour Cart:")
+        for item in cart_array.values():
+            print(f"- {item['product']['name']}  X  {item['quantity']}")
