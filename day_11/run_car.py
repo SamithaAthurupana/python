@@ -41,7 +41,7 @@ while True:
 
     if choice == 3:
         model = input(" Enter the model: ")
-        if car_inventry.find_cars_by_model(model) != None:
+        if car_inventry.find_cars_by_model(model) is not None:
             for car in car_inventry.find_cars_by_model(model):
                 print(f"Car Name - {car['model']} manufacture in - {car['manufacture_year']} - country - {car['country_of_origin']}")
 
