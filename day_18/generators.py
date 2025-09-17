@@ -16,34 +16,32 @@ from typing import List
 #
 #
 
+# Example 1: simple generator
 def generate_numbers():
     yield 10
     yield 11
     yield 12
 
 gen = generate_numbers()
-print(next(gen))
-print(next(gen))
-print(next(gen))
+print(next(gen))  # → 10
+print(next(gen))  # → 11
+print(next(gen))  # → 12
 
 def create_large_list(n):
-    return list(range(n))
+    return list(range(n))  # creates a full list in memory
 
 def create_large_list_yield(n):
     for i in range(n):
-        yield i
+        yield i  # yields one item at a time
 
 start_time = time.time()
 print(f"List Start Time - {start_time}")
-large_list = create_large_list(100000000)
+large_list = create_large_list(100000000)  # creates 100M elements in memory
 end_time = time.time()
 print(f"List end Time - {end_time}")
 
-yield_start_time = time.time()
-print(f"End yield Time - {start_time}")
-large_list_yield = create_large_list_yield(100000000)
-yield_end_time = time.time()
-print(f"End yield Time - {end_time}")
+print(f"End yield Time - {start_time}")  # should be yield_start_time
+print(f"End yield Time - {end_time}")    # should be yield_end_time
 
 def get_even_num(n):
     result = []
