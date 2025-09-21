@@ -83,68 +83,54 @@ class LoanRepository(ABC):
 # In-memory storage implementation of BookRepository
 class InMemoryBookRepository(BookRepository):
     def __init__(self):
-        # Private dictionary to store books (book_id -> Book object)
-        self.__book: Dict[str, Book] = {}
+        self.__book: Dict[str, Book] = {}   # Private dictionary to store books (book_id -> Book object)
 
     def add(self, book: Book) -> None:
-        # Add or overwrite book by ID
-        self.__book[book.book_id] = book
+        self.__book[book.book_id] = book    # Add or overwrite book by ID
 
     def get_book_by_id(self, book_id: str) -> Book:
-        # Return book by ID, or None if not found
-        return self.__book.get(book_id)
+        return self.__book.get(book_id)     # Return book by ID, or None if not found
 
     def update(self, book: Book) -> None:
-        # Update existing book (overwrites if exists)
-        self.__book[book.book_id] = book
+        self.__book[book.book_id] = book    # Update existing book (overwrites if exists)
 
     def list_all_books(self) -> List[Book]:
-        # Return list of all stored Book objects
-        return list(self.__book.values())
+        return list(self.__book.values())   # Return list of all stored Book objects
 
 
 # In-memory storage implementation of MemberRepository
 class InMemoryMemberRepository(MemberRepository):
 
     def __init__(self):
-        # Private dictionary for members (member_id -> Member object)
-        self.__members: Dict[str, Member] = {}
+        self.__members: Dict[str, Member] = {}      # Private dictionary for members (member_id -> Member object)
 
     def add(self, member: Member) -> None:
-        # Add or overwrite member
-        self.__members[member.member_id] = member
+        self.__members[member.member_id] = member   # Add or overwrite member
 
     def get_member_by_id(self, member_id: str) -> Member:
-        # Return member by ID, or None if not found
-        return self.__members.get(member_id)
+        return self.__members.get(member_id)    # Return member by ID, or None if not found
 
     def list_all_members(self) -> List[Member]:
-        # Return list of all Member objects
-        return list(self.__members.values())
+        return list(self.__members.values())    # Return list of all Member objects
 
 
 # In-memory storage implementation of LoanRepository
 class InMemoryMemberLoanRepository(LoanRepository):
 
     def __init__(self):
-        # Private dictionary for loans (loan_id -> Loan object)
-        self.__loans: Dict[str, Loan] = {}
+        self.__loans: Dict[str, Loan] = {}      # Private dictionary for loans (loan_id -> Loan object)
 
     def add(self, loan: Loan) -> None:
-        # Add or overwrite loan
-        self.__loans[loan.loan_id] = loan
+        self.__loans[loan.loan_id] = loan   # Add or overwrite loan
 
     def get_by_id(self, loan_id: str) -> Loan:
-        # Return loan by ID, or None if not found
-        return self.__loans.get(loan_id)
+        return self.__loans.get(loan_id)    # Return loan by ID, or None if not found
 
     def update(self, loan: Loan) -> None:
-        # Update existing loan (overwrites if exists)
-        self.__loans[loan.loan_id] = loan
+        self.__loans[loan.loan_id] = loan   # Update existing loan (overwrites if exists)
 
     def list_all_loans(self) -> List[Loan]:
-        # Return list of all Loan objects
-        return list(self.__loans.values())
+        return list(self.__loans.values())  # Return list of all Loan objects
 
 
 # -------------------- DATABASE IMPLEMENTATION (STUB) --------------------
