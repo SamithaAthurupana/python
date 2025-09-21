@@ -9,6 +9,6 @@ class BankAccount:
     def get_account_balance(self):
         return self.__account_balance
 
-acc = BankAccount("Kamal", 5000.0)
-print(acc.get_owner_infor())      # Kamal
-print(acc.get_account_balance())  # 5000.0
+bAcc = BankAccount("Samitha",23.2)
+print(bAcc.get_account_balance())
+print(bAcc.get_owner_infor())
