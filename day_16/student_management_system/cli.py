@@ -74,7 +74,7 @@ def main():
             break
 
         else:
-            print("Invalid choice. Try again!")
+            print("Invalid. Try again!")
 
 if __name__ == "__main__":
     main()
