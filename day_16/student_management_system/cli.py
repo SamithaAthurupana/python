@@ -15,7 +15,7 @@ def show_menu():
     7. View Student Marks
     8. Show Average Marks
     9. Exit
-    ===================================
+    ********************************
     """)
 
 def main():
