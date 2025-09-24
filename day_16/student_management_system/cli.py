@@ -5,7 +5,7 @@ from student_management_system.service import StudentService
 
 def show_menu():
     print("""
-    ===== Student Management Menu =====
+    _===== Student Management Menu =====_
     1. Add Student
     2. Search Student by ID
     3. Delete Student by ID
@@ -15,7 +15,7 @@ def show_menu():
     7. View Student Marks
     8. Show Average Marks
     9. Exit
-    ===================================
+    _===================================_
     """)
 
 def main():
