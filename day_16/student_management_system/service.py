@@ -5,8 +5,9 @@ from student_management_system.repositories import StudentRepository
 
 class StudentService:
     def __init__(self, repository: StudentRepository):
-        self.repo = repository
+        self.repo = repository # Dependency injection
 
+    # All methods delegate to repository with validation
     def add_student(self, first_name, last_name, address, nic, nationality, academic_no):
         student = Student(first_name, last_name, address, nic, nationality, academic_no)
         self.repo.add_student(student)

@@ -20,7 +20,7 @@ def show_menu():
 
 def main():
     repo = StudentRepository()
-    service = StudentService(repo)
+    service = StudentService(repo) # Dependency injection
 
     while True:
         show_menu()
