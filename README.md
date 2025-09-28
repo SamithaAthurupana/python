@@ -15,8 +15,6 @@ A comprehensive collection of Python projects demonstrating various programming 
 - **Database Integration** - SQLite and database management
 - **Machine Learning** - Basic ML implementations
 
-## 📁 Project Structure
-python/
 ├── 📱 GUI Applications/
 │ ├── student_management.py
 │ ├── calculator_app.py
