@@ -15,40 +15,41 @@ A comprehensive collection of Python projects demonstrating various programming 
 - **Database Integration** - SQLite and database management
 - **Machine Learning** - Basic ML implementations
 
-├── 📱 GUI Applications/
-│ ├── student_management.py
-│ ├── calculator_app.py
-│ └── weather_app.py
-│
-├── 📊 Data Analysis/
-│ ├── data_visualization.py
-│ ├── pandas_analysis.py
-│ └── statistical_analysis.py
-│
-├️ 🕸️ Web Scraping/
-│ ├── web_crawler.py
-│ ├── api_integration.py
-│ └── data_extractor.py
-│
-├️ 🖼️ Image Processing/
-│ ├── image_filter.py
-│ ├── face_detection.py
-│ └── image_converter.py
-│
-├️ 🤖 Machine Learning/
-│ ├── linear_regression.py
-│ ├── classification_model.py
-│ └── nlp_basics.py
-│
-├️ 📁 Database/
-│ ├── sqlite_manager.py
-│ └── crud_operations.py
-│
-├── requirements.txt
-├── config.py
-└── README.md
+## 📁 Project Structure
 
-text
+- **GUI Applications/**
+  - student_management.py
+  - calculator_app.py
+  - weather_app.py
+
+- **Data Analysis/**
+  - data_visualization.py
+  - pandas_analysis.py
+  - statistical_analysis.py
+
+- **Web Scraping/**
+  - web_crawler.py
+  - api_integration.py
+  - data_extractor.py
+
+- **Image Processing/**
+  - image_filter.py
+  - face_detection.py
+  - image_converter.py
+
+- **Machine Learning/**
+  - linear_regression.py
+  - classification_model.py
+  - nlp_basics.py
+
+- **Database/**
+  - sqlite_manager.py
+  - crud_operations.py
+
+- **Root Files**
+  - requirements.txt
+  - config.py
+  - README.md
 
 ## 🛠️ Installation & Setup
 
