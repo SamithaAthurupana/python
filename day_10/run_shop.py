@@ -17,7 +17,7 @@ while True:
         products.show_products()
         products_id = int(input("\n Enter the product Id: "))
 
-        if products.find_products_by_id(products_id) == None:
+        if products.find_products_by_id(products_id) is None:
             print("Sorry this product doesn't exits")
         else:
             quantity = int(input("Enter quantity: "))
