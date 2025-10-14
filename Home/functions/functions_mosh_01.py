@@ -80,6 +80,48 @@ print(fizz_buzz(15))'''
 
 print(els(3,2))'''
 
-#===========================================================
+#========================================================
+#
+# student = {
+#     "name" : "samitha",
+#     "age" : 27,
+#     "grade" : "A",
+#     "marks": [23,43,2]
+# }
+#
+# for value in student.values():
+#     print(value)
+#
+# student["name"] = "23111"
+#
+# student["marks"].append(47)
+#
+# for value in student.items():
+#     print(value)
+#
+# for marks in student["marks"]:
+#     print(marks)
+
+# for key, value in student.items():
+#     print(f"key: {key}, value: {value}")
 
 
+empty_phonebook = {}
+
+def add_contact():
+    pass
+
+def main_func():
+    global empty_phonebook
+
+    while True:
+        print("""Main menu:
+                1. Add a new contact 
+                2. Search a contact 
+                3. Delete a contact 
+                4. Look phone book 
+                5. Update existing contact 
+    """)
+
+        choice = int(input("Enter your selection: "))
+main_func()
