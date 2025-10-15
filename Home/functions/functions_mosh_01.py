@@ -106,22 +106,92 @@ print(els(3,2))'''
 #     print(f"key: {key}, value: {value}")
 
 
-empty_phonebook = {}
-
-def add_contact():
-    pass
-
-def main_func():
-    global empty_phonebook
-
-    while True:
-        print("""Main menu:
-                1. Add a new contact 
-                2. Search a contact 
-                3. Delete a contact 
-                4. Look phone book 
-                5. Update existing contact 
-    """)
-
-        choice = int(input("Enter your selection: "))
-main_func()
+# empty_phonebook = {}
+#
+# def add_contact(phonebook, name, number):
+#     if name not in phonebook:
+#         phonebook[name] = number
+#         print(f"Contact '{name}' added successfully!")
+#     else:
+#         print(f"Contact '{name}' already exists! Use update instead.")
+#
+# def search_contact(phonebook, name):
+#     if name in phonebook:
+#         return phonebook[name]
+#     else:
+#         return "Contact not found"
+#
+# def delete_contact(phonebook, name):
+#     if name in phonebook:
+#         del phonebook[name]
+#         return True
+#     else:
+#         return False
+#
+# def update_contact(phonebook, name, number):
+#     if name not in phonebook:
+#         phonebook[name] = number
+#         return True
+#     else:
+#         return False
+#
+#
+# def main_func():
+#     global empty_phonebook
+#
+#     while True:
+#         print("""Main menu:
+#                 1. Add a new contact
+#                 2. Search a contact
+#                 3. Delete a contact
+#                 4. Look phone book
+#                 5. Update existing contact
+#                 6. Exit
+#     """)
+#
+#         try:
+#             choice = int(input("Enter your selection: "))
+#         except ValueError:
+#             print("Please enter a valid number!")
+#             continue
+#
+#         if choice == 1:
+#             name = input("Enter contact name: ")
+#             number = input("Enter contact number: ")
+#
+#             add_contact(phonebook=empty_phonebook, name=name, number=number)
+#
+#         elif choice == 2:
+#             name = input("Enter contact name: ")
+#             result = search_contact(phonebook=empty_phonebook, name=name)
+#             print(f"{name}: {result}")
+#
+#         elif choice == 3:
+#             name = input("Enter contact name: ")
+#             if delete_contact(phonebook=empty_phonebook, name=name):
+#                 print(f"{name} successfully deleted")
+#             else:
+#                 print(f"{name} not found")
+#
+#         elif choice == 4:
+#             if empty_phonebook:
+#                 for name, number in empty_phonebook.items():
+#                     print(f"{name}: {number}")
+#             else:
+#                 print("Phonebook is empty")
+#
+#         elif choice == 5:
+#             name = input("Enter contact name: ")
+#             number = int(input("Enter contact number: "))
+#             if update_contact(phonebook=empty_phonebook, name=name, number=number):
+#                 print(f"{name} is successfully updated")
+#             else:
+#                 print(f"{name} not found - cannot update")
+#
+#         elif choice == 6:
+#             print("Goodbye!")
+#             break
+#         else:
+#             print("Invalid choice! Please select 1-6")
+#
+# main_func()
