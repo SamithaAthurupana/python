@@ -195,3 +195,87 @@ print(els(3,2))'''
 #             print("Invalid choice! Please select 1-6")
 #
 # main_func()
+
+# Student Management System
+
+# Stores all student data
+# student_information = {}
+#
+# # Menu Display
+# def show_menu():
+#     print("""
+#     ===== Student Management Menu =====
+#     1. Add Student
+#     2. Search Student by ID
+#     3. Delete Student by ID
+#     4. Update Student Contact Number
+#     5. View All Student Names
+#     6. Add Subject Marks for a Student
+#     7. View Marks of a Student
+#     8. Show Average Marks for All Students
+#     9. Exit
+#     ====================================
+#     """)
+#
+# def add_student(students, student_id, name, age, address, contact):
+#     students[student_id]={
+#         "name": name,
+#         "age": age,
+#         "address": address,
+#         "contact": contact
+#     }
+#     print(f"{student_id}: {name} successfully added!")
+#
+# def search_student(students, student_id):
+#     if student_id in students:
+#         print(f"{students[student_id]}")
+#     else:
+#         print("Student not found.")
+#
+#
+# def delete_student(students, student_id):
+#     if student_id in students:
+#         del students[student_id]
+#         print(f"{student_id}: deleted!")
+#
+#
+# def update_student_contact(students, student_id, contact_no):
+#     if student_id in students:
+#         students[student_id]["contact_no"] = contact_no
+#     else:
+#         print("Student not found.")
+#
+#
+# def main():
+#     while True:
+#         show_menu()
+#
+#         input_usr = int(input("Enter your selection: "))
+#
+#         if input_usr == 1:
+#             student_id = input("Student ID: ")
+#             name = input("Student Name: ")
+#             age = input("Student Age: ")
+#             address = input("Student Address: ")
+#             contact = input("Student Contact No: ")
+#             add_student(student_information, student_id, name, age, address, contact)
+#
+#         if input_usr == 2:
+#             student_id = input("Student ID: ")
+#
+#             search_student(student_information, student_id)
+#
+#         if input_usr == 3:
+#             student_id = input("Student ID: ")
+#
+#             delete_student(student_information, student_id)
+#
+#         if input_usr == 4:
+#             student_id = input("Enter Student ID to Update: ").strip()
+#             contact_no = input("Enter New Contact Number: ").strip()
+#             update_student_contact(student_information, student_id, contact_no)
+#
+#
+#
+# main()
+
