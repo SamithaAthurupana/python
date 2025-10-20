@@ -1,4 +1,4 @@
-print((40/64)*100)
+# print((40/64)*100)
 '''
 count = 0
 x = ["cat", "dog", "test", "dad", "cat", "test"]
@@ -42,6 +42,16 @@ for animal in animals:
     if animal == "cat":
         count +=1
 print(f"cat count is: {count}")'''
+#
+# print([1,2,3][1:3])
 
-print([1,2,3][1:3])
 
+# animal = []
+#
+# while True:
+#     user_in = input("Enter animal name: ").lower().strip()
+#     if user_in == "q":
+#         break
+#     else:
+#         animal.append(user_in)
+# print(animal)
