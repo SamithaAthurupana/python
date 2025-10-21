@@ -1,6 +1,6 @@
 # student_management_system/repositories.py
 
-from student_management_system.models import Student
+from models import Student
 
 class StudentRepository:
     def __init__(self):

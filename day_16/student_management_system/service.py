@@ -1,7 +1,7 @@
 # student_management_system/service.py
 
-from student_management_system.models import Student
-from student_management_system.repositories import StudentRepository
+from models import Student
+from repositories import StudentRepository
 
 class StudentService:
     def __init__(self, repository: StudentRepository):

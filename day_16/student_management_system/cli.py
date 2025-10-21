@@ -1,7 +1,7 @@
 # student_management_system/cli.py
 
-from student_management_system.repositories import StudentRepository
-from student_management_system.service import StudentService
+from repositories import StudentRepository
+from service import StudentService
 
 def show_menu():
     print("""
