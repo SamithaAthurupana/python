@@ -1,12 +1,12 @@
-try:
-    x = int(input("Enter digits: "))
-except Exception as e:
-    print(e)
-
-try:
-    x = int(input("Enter digits: "))
-except BaseException as e:
-    print(e)
+# try:
+#     x = int(input("Enter digits: "))
+# except Exception as e:
+#     print(e)
+#
+# try:
+#     x = int(input("Enter digits: "))
+# except BaseException as e:
+#     print(e)
 
 try:
     x = int(input("Enter digits: "))

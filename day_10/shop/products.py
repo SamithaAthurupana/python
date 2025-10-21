@@ -20,3 +20,6 @@ def find_products_by_id(product_id):
         if product["id"] == product_id:
             return product
     return None
+
+if __name__ == '__main__':
+    show_products()
