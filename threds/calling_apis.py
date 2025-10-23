@@ -22,10 +22,11 @@ with ThreadPoolExecutor(max_workers=5) as executor:
 
     for url in urls:
         future = executor.submit(fetch_data,url)
+        print(future)
         futures.append(future)
 
     for f in futures:
-        results.append(f)
+        results.append(f.result())
 
 print(results)
 
